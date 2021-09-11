@@ -1,0 +1,32 @@
+.CastPage {
+  width: 100%;
+  padding: 15px;
+  font-size: 36px;
+  color: rgb(112, 106, 106);
+}
+.CastPageList {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: aqua;
+  list-style: none;
+}
+.CastPageListItem {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-decoration: none;
+  width: 300px;
+  flex-wrap: wrap;
+  margin: 15px;
+  border: 1px solid black;
+  border-radius: 6px;
+  background-color: white;
+}
+.CastPageListItemLink {
+  display: flex;
+
+  align-items: center;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
+}

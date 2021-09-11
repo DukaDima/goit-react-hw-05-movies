@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './CastPage.module.css';
+import PropTypes from 'prop-types';
 
 export default function CastPage() {
   const [actors, setActors] = useState([]);
@@ -25,16 +26,13 @@ export default function CastPage() {
 
   return (
     <div className={styles.CastPage}>
-      <h2>
-        <p>CastPage movieId {movieId}</p>
-      </h2>
       {error && <p>Ошибка запроса"</p>}
 
       {actors.length > 0 ? (
         <>
-          <ul className="">
+          <ul className={styles.CastPageList}>
             {actors.map(actor => (
-              <li className="" key={actor.id}>
+              <li key={actor.id} className={styles.CastPageListItem}>
                 <img
                   src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
                   alt="actor"
@@ -53,3 +51,7 @@ export default function CastPage() {
     </div>
   );
 }
+CastPage.propTypes = {
+  actors: PropTypes.array,
+  error: PropTypes.any,
+};

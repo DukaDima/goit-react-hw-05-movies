@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import styles from './MoviesPage.module.css';
 import SearchMovies from '../SearchMovies/SearchMovies';
+import PropTypes from 'prop-types';
 
 export default function MoviesPage() {
   const [input, setName] = useState('');
@@ -21,11 +22,10 @@ export default function MoviesPage() {
 
   const onSearchMovie = e => {
     e.preventDefault();
-    const searchMovies = new URLSearchParams(location.search).get('query');
-    console.log(searchMovies);
+
     history.push({
       ...location,
-      search: `query=${input}`,
+      search: `name=${input}`,
     });
 
     setName('');
@@ -34,6 +34,8 @@ export default function MoviesPage() {
   console.log(url);
   console.log(location);
   console.log(`${url}${location.search}`);
+  const searchMovies = new URLSearchParams(location.search).get('name');
+  console.log(searchMovies);
   return (
     <div className={styles.moviesPage}>
       <h2>MoviesPage</h2>
@@ -48,16 +50,20 @@ export default function MoviesPage() {
           onChange={nameChange}
         />
 
-        <NavLink to={`${url}${location.search}`}>
-          <button type="submit" onSubmit={onSearchMovie}>
-            Add
-          </button>
-        </NavLink>
+        {/* <NavLink to={`${url}${location.search}`}> */}
+        <button type="submit" onSubmit={onSearchMovie}>
+          Add
+        </button>
+        {/* </NavLink> */}
       </form>
       <hr />
-      <Route path={`${url}${location.search}`}>
-        <SearchMovies movies={input} />
-      </Route>
+      {/* <Route path={`${url}${location.search}`}> */}
+      <SearchMovies movies={searchMovies} />
+      {/* </Route> */}
     </div>
   );
 }
+
+MoviesPage.propTypes = {
+  input: PropTypes.string,
+};

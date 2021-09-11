@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import shortid from 'shortid';
 import styles from './ReviewsPage.module.css';
+import PropTypes from 'prop-types';
 
 export default function ReviewsPage() {
   const [reviews, setReviews] = useState([]);
@@ -23,12 +24,8 @@ export default function ReviewsPage() {
         });
     })();
   }, [movieId]);
-  console.log(reviews);
   return (
     <div className={styles.ReviewsPage}>
-      <h2>
-        <p>ReviewsPage movieId {movieId}</p>
-      </h2>
       {error && <p>Error</p>}
       {reviews.length > 0 ? (
         <>
@@ -49,3 +46,8 @@ export default function ReviewsPage() {
     </div>
   );
 }
+
+ReviewsPage.propTypes = {
+  reviews: PropTypes.array,
+  error: PropTypes.any,
+};

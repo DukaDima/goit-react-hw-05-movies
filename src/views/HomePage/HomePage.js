@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './HomePage.module.css';
+import PropTypes from 'prop-types';
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -21,13 +22,13 @@ export default function HomePage() {
   }, []);
   return (
     <div className={styles.homePage}>
-      <h2>HomePage</h2>
       {error && <p>Ошибка запроса"</p>}
       {movies && (
-        <ul className="">
+        <ul className={styles.homePageList}>
           {movies.map(movie => (
-            <li className="" key={movie.id}>
+            <li className={styles.homePageListItem} key={movie.id}>
               <Link
+                className={styles.homePageListItemLink}
                 to={{
                   pathname: `/movies/${movie.id}`,
                   state: { from: location },
@@ -37,7 +38,9 @@ export default function HomePage() {
                   src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                   alt="poster"
                 />
-                <p>{movie.original_title}</p>
+                <p className={styles.homePageListTitle}>
+                  {movie.original_title}
+                </p>
               </Link>
             </li>
           ))}
@@ -46,3 +49,8 @@ export default function HomePage() {
     </div>
   );
 }
+
+HomePage.propTypes = {
+  movies: PropTypes.array,
+  error: PropTypes.any,
+};

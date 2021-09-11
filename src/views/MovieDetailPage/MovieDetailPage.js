@@ -10,7 +10,8 @@ import {
 } from 'react-router-dom';
 import CastPage from '../CastPage/CastPage';
 import ReviewsPage from '../ReviewsPage/ReviewsPage';
-// import styles from './MovieDetailPage.module.css';
+import styles from './MovieDetailPage.module.css';
+import PropTypes from 'prop-types';
 
 export default function MovieDetailPage() {
   const [movie, setMovie] = useState(null);
@@ -33,10 +34,14 @@ export default function MovieDetailPage() {
   };
 
   return (
-    <div>
+    <div className={styles.detailPage}>
       {movie && (
         <>
-          <button type="button" onClick={onGoBack}>
+          <button
+            type="button"
+            onClick={onGoBack}
+            className={styles.detailPageButton}
+          >
             Go back
           </button>
           <hr />
@@ -48,7 +53,7 @@ export default function MovieDetailPage() {
           <p>Overview</p>
           <p>{movie.overview}</p>
           <p>Genres</p>
-          <ul>
+          <ul className={styles.detailPageList}>
             {movie.genres.map(genre => (
               <li key={genre.id}>{genre.name}</li>
             ))}
@@ -58,7 +63,7 @@ export default function MovieDetailPage() {
       )}
       <hr />
       <p>Additional information</p>
-      <ul>
+      <ul className={styles.detailPageList}>
         <li>
           <NavLink to={`${url}/cast`}>Cast</NavLink>
         </li>
@@ -78,3 +83,8 @@ export default function MovieDetailPage() {
     </div>
   );
 }
+
+MovieDetailPage.propTypes = {
+  movie: PropTypes.object,
+  error: PropTypes.any,
+};

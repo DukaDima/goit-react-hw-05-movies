@@ -1,4 +1,29 @@
 .homePage {
+  width: 100%;
+  padding: 15px;
   font-size: 36px;
   color: rgb(112, 106, 106);
+}
+.homePageList {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: aqua;
+  list-style: none;
+}
+.homePageListItem {
+  display: flex;
+  width: 300px;
+  flex-wrap: wrap;
+  margin: 15px;
+  border: 1px solid black;
+  border-radius: 6px;
+  background-color: white;
+}
+.homePageListItemLink {
+  display: flex;
+
+  align-items: center;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
 }
