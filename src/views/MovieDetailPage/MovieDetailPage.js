@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import {
   NavLink,
   useParams,
@@ -8,11 +8,17 @@ import {
   useLocation,
   useHistory,
 } from 'react-router-dom';
-import CastPage from '../CastPage/CastPage';
-import ReviewsPage from '../ReviewsPage/ReviewsPage';
+// import CastPage from '../CastPage/CastPage';
+// import ReviewsPage from '../ReviewsPage/ReviewsPage';
 import styles from './MovieDetailPage.module.css';
 import PropTypes from 'prop-types';
+const CastPage = lazy(() =>
+  import('../CastPage/CastPage' /* webpackChunkName: "CastPage" */),
+);
 
+const ReviewsPage = lazy(() =>
+  import('../ReviewsPage/ReviewsPage' /* webpackChunkName: "ReviewsPage" */),
+);
 export default function MovieDetailPage() {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
@@ -72,14 +78,16 @@ export default function MovieDetailPage() {
         </li>
       </ul>
       <hr />
-      <Switch>
-        <Route path="/movies/:movieId/cast">
-          <CastPage />
-        </Route>
-        <Route path="/movies/:movieId/reviews">
-          <ReviewsPage />
-        </Route>
-      </Switch>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Switch>
+          <Route path="/movies/:movieId/cast">
+            <CastPage />
+          </Route>
+          <Route path="/movies/:movieId/reviews">
+            <ReviewsPage />
+          </Route>
+        </Switch>
+      </Suspense>
     </div>
   );
 }
